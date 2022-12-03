@@ -1,8 +1,11 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import conexaoJDBC.SingleConnection;
+import model.Usuario;
 
 /**
  * A função do DAO é gerenciar os objetos do banco de dados.
@@ -19,6 +22,29 @@ public class UsuarioDao {
 	
 	public UsuarioDao() {
 		connection = SingleConnection.getConnection();
+	}
+	
+	public void salvar(Usuario usuario) {
+		
+		String sql = "INSERT INTO USUARIO(id, nome, email)VALUES(?,?,?)";
+		
+		try {
+			PreparedStatement inserir = connection.prepareStatement(sql);
+			inserir.setLong(1, usuario.getId());
+			inserir.setString(2, usuario.getNome());
+			inserir.setString(3, usuario.getEmail());
+			inserir.execute();
+			connection.commit();
+			System.out.println("Cadastrado com sucesso!");
+			
+		} catch (SQLException e) {
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
 	}
 	
 }

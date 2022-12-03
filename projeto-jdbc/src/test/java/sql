@@ -1,0 +1,10 @@
+create table usuario (
+ id bigint not null, 
+ nome character varying(255),
+ email character varying(255),
+ constraint usuario_pk primary key(id)
+)
+
+insert into usuario (id, nome, email) values (1, 'Daniel', 'd4n.formacaoJava@gmail.com');
+
+select * from usuario;
