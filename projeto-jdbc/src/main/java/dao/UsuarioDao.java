@@ -16,11 +16,12 @@ import model.Usuario;
  * A classe de conexão tem um vinculo com a classe dao para que seja possivel o acesso ao BD. 
  * Portanto, o UsuarioDao precisa de um connection, isto é, ele é ativado através do método getConnection(). 
  * É na classe dao que vai ser manipulado a linguagem sql, através do comando "preparedStatement". 
- * Então, o sql preparado vai para a connection que terá a função de inserir no BD.
+ * Então, o sql preparado vai para a connection que terá a função de inserir no BD. 
  * ResultSet é um objeto capaz de guardar e buscar resultados no banco. 
- * Todos os dados criados e manipulados estarão dentro do ResultSet.
- * No UsuarioDAO é feito um "execute()" para retornar um boolean, entretanto, com o ResultSet
- * é usado o "executeQuery()", uma vez que retorna todos os resultados da consulta.
+ * Todos os dados criados e manipulados estarão dentro do ResultSet. 
+ * No UsuarioDAO é feito um "execute()" para retornar um boolean, 
+ * entretanto, com o ResultSet é usado o "executeQuery()", 
+ * uma vez que retorna todos os resultados da consulta. 
  * Para extrair o resultado linha por linha dentro do resultSet é add o objeto usuário correspondente para ele.
  */
 
@@ -74,9 +75,9 @@ public class UsuarioDao {
 
 			list.add(usuario);
 		}
-		
+
 		System.out.println("Lista mostrada com sucesso!");
-		
+
 		return list;
 	}
 
@@ -99,6 +100,28 @@ public class UsuarioDao {
 		}
 
 		return buscarUsuario;
+	}
+
+	// Atualizar dados do usuário
+	public void atualizar(Usuario usuario) {
+
+		try {
+			String sql = "update usuario set nome = ?, email = ? where id = " + usuario.getId();
+			PreparedStatement atualizar = connection.prepareStatement(sql);
+			atualizar.setString(1, usuario.getNome());
+			atualizar.setString(2, usuario.getEmail());
+			atualizar.execute();
+			connection.commit();
+
+		} catch (SQLException e) {
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
+
 	}
 
 }
