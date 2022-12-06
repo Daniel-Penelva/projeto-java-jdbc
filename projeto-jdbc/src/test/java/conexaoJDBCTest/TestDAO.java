@@ -3,8 +3,10 @@ package conexaoJDBCTest;
 import java.util.List;
 import org.junit.Test;
 
+import dao.BeanUserPhoneDao;
 import dao.TelefoneDao;
 import dao.UsuarioDao;
+import model.BeanUserPhone;
 import model.Telefone;
 import model.Usuario;
 
@@ -92,7 +94,7 @@ public class TestDAO {
 		}
 	}
 
-	//@Test
+	// @Test
 	public void testeDeletarUsuarioBanco() {
 		try {
 
@@ -105,7 +107,7 @@ public class TestDAO {
 		}
 	}
 
-	//@Test
+	// @Test
 	public void TesteDeletarUsuarioBanco1() {
 
 		Usuario usu = new Usuario();
@@ -119,15 +121,43 @@ public class TestDAO {
 			System.out.println("Usuário não existe no banco de dados!");
 		}
 	}
-	
-	@Test
+
+	// @Test
 	public void TesteCadastrarTelefone() {
 		Telefone telefone = new Telefone();
 		telefone.setNumero("(21)98088-9900");
 		telefone.setTipo("celular");
 		telefone.setFk_pessoa(4L);
-		
+
 		TelefoneDao telDao = new TelefoneDao();
 		telDao.salvar(telefone);
+	}
+
+	// @Test
+	public void TesteBuscarUserPhone() {
+
+		BeanUserPhoneDao daoUserPhone = new BeanUserPhoneDao();
+		List<BeanUserPhone> lista = daoUserPhone.buscarUserPhone(4L);
+
+		for (BeanUserPhone listarUserPhone : lista) {
+			System.out.println(listarUserPhone);
+		}
+	}
+
+	@Test
+	public void TesteListarUserPhone() {
+		BeanUserPhoneDao daoUserPhone = new BeanUserPhoneDao();
+
+		try {
+			List<BeanUserPhone> list = daoUserPhone.listarUserPhone();
+
+			for (BeanUserPhone listarUserPhone : list) {
+				// imprimi o toString
+				System.out.println(listarUserPhone);
+				System.out.println("------------------------------------");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -56,6 +56,13 @@ Inserindo na tabela telefone
 
 INSERT INTO telefone(numero, tipo, usuariopessoa)VALUES (?, ?, ?);
 
+---------------------------------------------------------
 
+Consulta com inner join 
 
+select * from telefone as t inner join usuario as u on t.usuariopessoa = u.id;
+
+select nome, numero, email from telefone as t inner join usuario as u on t.usuariopessoa = u.id where u.id = 4;
+
+select * from telefone as t full join usuario as u on t.usuariopessoa = u.id;
 
