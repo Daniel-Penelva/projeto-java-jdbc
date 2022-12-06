@@ -7,7 +7,7 @@ import model.Usuario;
 
 public class TestDAO {
 
-	@Test
+	// @Test
 	public void testeCadastrarBanco() {
 		Usuario usu = new Usuario();
 		UsuarioDao usuDao = new UsuarioDao();
@@ -41,16 +41,16 @@ public class TestDAO {
 		}
 	}
 
-	//@Test
+	// @Test
 	public void testeBuscarDados() {
 
 		try {
 			UsuarioDao usuDao = new UsuarioDao();
 			Usuario usu = usuDao.buscar(7L);
-			
-			if(usu.getId() != null) {
-			System.out.println(usu);
-			}else {
+
+			if (usu.getId() != null) {
+				System.out.println(usu);
+			} else {
 				System.out.println("Usuário não encontrado!");
 			}
 
@@ -61,7 +61,7 @@ public class TestDAO {
 
 	}
 
-	//@Test
+	// @Test
 	public void testeAtualizarBanco() {
 
 		try {
@@ -70,22 +70,50 @@ public class TestDAO {
 
 			// Tem que buscar o id do usuário através do método de busca.
 			Usuario usu = usuDao.buscar(5L);
-			
+
 			if (usu.getId() != null) {
-			
+
 				usu.setNome("Helena Peres");
 				usu.setEmail("helena@gmail.com");
-			
+
 				usuDao.atualizar(usu);
-				
+
 				System.out.println("Usuário alterado - para:");
 				System.out.println("Nome: " + usu.getNome() + " - email: " + usu.getEmail());
-			}else {
+			} else {
 				System.out.println("Usuário não encontrado para alteração!");
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	//@Test
+	public void testeDeletarUsuarioBanco() {
+		try {
+
+			UsuarioDao usuDao = new UsuarioDao();
+			Usuario usu = new Usuario();
+
+			usuDao.deletar(7L);
+		} catch (Exception e) {
+
+		}
+	}
+
+	@Test
+	public void TesteDeletarUsuarioBanco1() {
+
+		Usuario usu = new Usuario();
+		usu.setId(6L);
+
+		if (usu.getId() != null) {
+			UsuarioDao usuDao = new UsuarioDao();
+			usuDao.deletar1(usu);
+			System.out.println("Deletado com sucesso!");
+		} else {
+			System.out.println("Usuário não existe no banco de dados!");
 		}
 	}
 }

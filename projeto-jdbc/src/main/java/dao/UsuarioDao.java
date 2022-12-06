@@ -122,5 +122,48 @@ public class UsuarioDao {
 		}
 
 	}
+	
+	public void deletar(Long id) {
+		try {
+			String sql = "delete from usuario where id = " + id;
+			
+			PreparedStatement deletar = connection.prepareStatement(sql);
+			
+			deletar.execute();
+			
+			connection.commit();
+			
+			System.out.println("Exclusão com sucesso!");
+			
+		} catch (Exception e) {
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
+	}
+	
+	/* Meu exemplo de delete */
+	public void deletar1(Usuario usuario) {
+		String sql = "delete from usuario where id = ?";
+		
+		try {
+			PreparedStatement deletar = connection.prepareStatement(sql);
+			deletar.setLong(1, usuario.getId());
+			deletar.execute();
+			connection.commit();
+		
+		} catch (SQLException e) {
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
+		
+	}
 
 }
