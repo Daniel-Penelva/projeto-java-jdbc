@@ -83,5 +83,32 @@ public class BeanUserPhoneDao {
 		System.out.println("Lista mostrada com sucesso!");
 		return lista;
 	}
+	
+	// Deletar Phone e usuario - exclusão de dados em cascata
+	public void deletarUserPhone(Long idUsuarioPhone) {
+		
+		String sqlPhone = "delete from telefone where usuariopessoa = " + idUsuarioPhone;
+		String sqlUser = "delete from usuario where id = " + idUsuarioPhone;
+		
+		try {
+			PreparedStatement prepararSqlPhoneUser = connection.prepareStatement(sqlPhone);
+			prepararSqlPhoneUser.executeUpdate();
+			connection.commit();
+			
+			prepararSqlPhoneUser = connection.prepareStatement(sqlUser);
+			prepararSqlPhoneUser.executeUpdate();
+			connection.commit();
+			
+			System.out.println("Deletado com sucesso! ");
+			
+		} catch (SQLException e) {
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
+	}
 
 }

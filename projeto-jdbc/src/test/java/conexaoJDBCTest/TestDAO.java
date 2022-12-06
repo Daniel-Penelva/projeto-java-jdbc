@@ -144,7 +144,7 @@ public class TestDAO {
 		}
 	}
 
-	@Test
+	// @Test
 	public void TesteListarUserPhone() {
 		BeanUserPhoneDao daoUserPhone = new BeanUserPhoneDao();
 
@@ -159,5 +159,13 @@ public class TestDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	
+	//Exclusão de dados em cascata
+	@Test
+	public void TesteDeletarUserPhone() {
+		BeanUserPhoneDao daoUserPhoneDao = new BeanUserPhoneDao();
+		daoUserPhoneDao.deletarUserPhone(3L);
 	}
 }
