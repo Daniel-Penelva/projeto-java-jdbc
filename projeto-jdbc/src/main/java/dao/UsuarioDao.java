@@ -36,13 +36,12 @@ public class UsuarioDao {
 	// Cadastrar um usuário
 	public void salvar(Usuario usuario) {
 
-		String sql = "INSERT INTO USUARIO(id, nome, email)VALUES(?,?,?)";
+		String sql = "INSERT INTO USUARIO(nome, email)VALUES(?,?)";
 
 		try {
 			PreparedStatement inserir = connection.prepareStatement(sql);
-			inserir.setLong(1, usuario.getId());
-			inserir.setString(2, usuario.getNome());
-			inserir.setString(3, usuario.getEmail());
+			inserir.setString(1, usuario.getNome());
+			inserir.setString(2, usuario.getEmail());
 			inserir.execute();
 			connection.commit();
 			System.out.println("Cadastrado com sucesso!");

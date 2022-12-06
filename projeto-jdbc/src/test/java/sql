@@ -8,3 +8,16 @@ create table usuario (
 insert into usuario (id, nome, email) values (1, 'Daniel', 'd4n.formacaoJava@gmail.com');
 
 select * from usuario;
+
+---------------------------------------------
+Criando uma sequencia para a tabela de usuário
+
+create SEQUENCE usersequence
+increment 1
+minvalue 1
+maxvalue 1000
+start 7;
+
+select * from usuario;
+
+alter table usuario ALTER column id set default nextval('usersequence'::regclass);

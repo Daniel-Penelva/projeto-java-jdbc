@@ -7,14 +7,13 @@ import model.Usuario;
 
 public class TestDAO {
 
-	// @Test
+	@Test
 	public void testeCadastrarBanco() {
 		Usuario usu = new Usuario();
 		UsuarioDao usuDao = new UsuarioDao();
 
-		usu.setId(6L);
-		usu.setNome("Miranda Nunes");
-		usu.setEmail("miranda@gmail.com");
+		usu.setNome("Caio Marques");
+		usu.setEmail("caio@gmail.com");
 
 		usuDao.salvar(usu);
 	}
@@ -62,7 +61,7 @@ public class TestDAO {
 
 	}
 
-	@Test
+	//@Test
 	public void testeAtualizarBanco() {
 
 		try {
