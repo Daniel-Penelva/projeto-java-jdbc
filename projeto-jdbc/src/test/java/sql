@@ -10,6 +10,7 @@ insert into usuario (id, nome, email) values (1, 'Daniel', 'd4n.formacaoJava@gma
 select * from usuario;
 
 ---------------------------------------------
+
 Criando uma sequencia para a tabela de usuário
 
 create SEQUENCE usersequence
@@ -21,3 +22,34 @@ start 7;
 select * from usuario;
 
 alter table usuario ALTER column id set default nextval('usersequence'::regclass);
+
+----------------------------------------------
+
+Restrigindo o id da tabela usuario para unico 
+alter table usuario add unique(id);
+
+----------------------------------------------
+
+Criando a tabela telefone
+
+create table telefone(
+ id bigint not null, 
+ numero character varying (255) not null,
+ tipo character varying (255) not null,
+ usuariopessoa bigint not null,
+ constraint telefone_id primary key(id));
+
+ alter table telefone add foreign key (usuariopessoa) references usuario(id);
+
+create SEQUENCE user_telefone_seq
+increment 1
+minvalue 1
+maxvalue 1000
+start 1;
+
+alter table user_telefone_seq OWNER TO postgres;
+
+ALTER TABLE telefone ALTER COLUMN id SET DEFAULT nextval('user_telefone_seq'::regclass);
+
+
+
