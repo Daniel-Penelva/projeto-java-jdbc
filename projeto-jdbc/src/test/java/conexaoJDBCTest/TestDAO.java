@@ -2,7 +2,10 @@ package conexaoJDBCTest;
 
 import java.util.List;
 import org.junit.Test;
+
+import dao.TelefoneDao;
 import dao.UsuarioDao;
+import model.Telefone;
 import model.Usuario;
 
 public class TestDAO {
@@ -102,7 +105,7 @@ public class TestDAO {
 		}
 	}
 
-	@Test
+	//@Test
 	public void TesteDeletarUsuarioBanco1() {
 
 		Usuario usu = new Usuario();
@@ -115,5 +118,16 @@ public class TestDAO {
 		} else {
 			System.out.println("Usuário não existe no banco de dados!");
 		}
+	}
+	
+	@Test
+	public void TesteCadastrarTelefone() {
+		Telefone telefone = new Telefone();
+		telefone.setNumero("(21)98088-9900");
+		telefone.setTipo("celular");
+		telefone.setFk_pessoa(4L);
+		
+		TelefoneDao telDao = new TelefoneDao();
+		telDao.salvar(telefone);
 	}
 }

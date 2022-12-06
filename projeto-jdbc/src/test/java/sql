@@ -51,5 +51,11 @@ alter table user_telefone_seq OWNER TO postgres;
 
 ALTER TABLE telefone ALTER COLUMN id SET DEFAULT nextval('user_telefone_seq'::regclass);
 
+---------------------------------------------------------
+Inserindo na tabela telefone
+
+INSERT INTO telefone(numero, tipo, usuariopessoa)VALUES (?, ?, ?);
+
+
 
 
